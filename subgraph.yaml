@@ -1,0 +1,29 @@
+specVersion: 0.0.4
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Todo
+    network: goerli
+    source:
+      address: "0xe64E9F01a457abea2191b7D7FB9a925Dc04D0940"
+      abi: Todo
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - TaskCreated
+        - TaskDeleted
+        - TaskToggledCompleted
+      abis:
+        - name: Todo
+          file: ./abis/Todo.json
+      eventHandlers:
+        - event: TaskCreated(indexed address,uint256,string,bool)
+          handler: handleTaskCreated
+        - event: TaskDeleted(indexed address,uint256)
+          handler: handleTaskDeleted
+        - event: TaskToggledCompleted(indexed address,uint256,string,bool)
+          handler: handleTaskToggledCompleted
+      file: ./src/todo.ts
