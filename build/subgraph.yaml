@@ -1,6 +1,6 @@
 specVersion: 0.0.4
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum
     name: Todo
@@ -19,7 +19,7 @@ dataSources:
         - TaskToggledCompleted
       abis:
         - name: Todo
-          file: ./abis/Todo.json
+          file: Todo/abis/Todo.json
       eventHandlers:
         - event: TaskCreated(indexed address,uint256,string,bool)
           handler: handleTaskCreated
@@ -27,4 +27,4 @@ dataSources:
           handler: handleTaskDeleted
         - event: TaskToggledCompleted(indexed address,uint256,string,bool)
           handler: handleTaskToggledCompleted
-      file: ./src/todo.ts
+      file: Todo/Todo.wasm
